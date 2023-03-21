@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type = "text/JavaScript" src = " https://MomentJS.com/downloads/moment.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	<title></title>
+</head>
+<body>
+ Date: <input type="text" id="FromDate">
+ Hour: <input type="text" id="FromHour">
+ Minute: <input type="text" id="FromMinutes">
+ UTC +/- <input type="text" id="utc">
+ <button type="button" onclick="convert()">Click</button>
+ <div id="board">
+ 
+ <script type="text/javascript">
+ 	var counter = 1;
+ 	function convert(){
+ 		var FromDate = document.getElementById('FromDate').value;
+ 		var FromHour = document.getElementById('FromHour').value;
+ 		var FromMinutes = document.getElementById('FromMinutes').value;
+ 		var dateHourMinutes = "2023"+"/"+"3"+"/"+FromDate+" "+FromHour+":"+FromMinutes;
+ 		var convertedDateTime = new Date(moment(dateHourMinutes).format("YYYY-MM-DD HH:mm"));
+ 		var p = document.getElementById('utc').value;
+ 		var newConv = moment(convertedDateTime).add(p, 'hours').toDate();
+ 		var finalchange = moment(newConv).format("YYYY-MM-DD HH:mm");
+ 		console.log(finalchange);
+ 		if(counter == 1){
+ 		$("#board").append("<input type='text' class='forVal' id='myInput'>");
+ 		$("#board").append("<button onclick='myFunction()'>Copy text</button>");
+ 		counter = counter + 1;	
+ 		}
+ 		
+ 		$('.forVal').val(finalchange);
+ 		$('.forVal').attr('disabled', 'disabled');
+
+ 	}	
+function myFunction() {
+  // Get the text field
+  var copyText = document.getElementById("myInput");
+
+  // Select the text field
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); // For mobile devices
+
+  // Copy the text inside the text field
+  navigator.clipboard.writeText(copyText.value);
+  
+  // Alert the copied text
+  alert("Copied the text: " + copyText.value);
+}
+ </script>
+</body>
+</html>
